@@ -1,0 +1,1033 @@
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --sidebarBg: #ffffff;
+  --border: #e5e7eb;
+  --text: #0f172a;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+  --shadow: 0 26px 90px rgba(15, 23, 42, 0.08);
+  --shadow2: 0 14px 40px rgba(15, 23, 42, 0.08);
+  --radius: 18px;
+  --sidebarW: 300px;
+  --maxChatW: 860px;
+  --fontScale: 100%;
+  --accent: #3b82f6;
+  --accentSoft: #dbeafe;
+  --sidebarPadX: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+#root {
+  height: 100%;
+}
+
+.app {
+  height: 100%;
+  display: flex;
+  font-size: var(--fontScale);
+}
+
+.sidebar {
+  width: var(--sidebarW);
+  flex: 0 0 auto;
+  flex-basis: var(--sidebarW);
+  border-right: 1px solid var(--border);
+  background: var(--sidebarBg);
+  overflow: hidden;
+  transition:
+    width 240ms ease,
+    flex-basis 240ms ease,
+    transform 240ms ease,
+    opacity 200ms ease,
+    border-color 240ms ease;
+  will-change: width, flex-basis, transform;
+}
+
+.sidebarInner {
+  transition: opacity 160ms ease;
+  will-change: opacity;
+}
+
+.appSidebarCollapsed .sidebar {
+  width: 0;
+  flex-basis: 0;
+  transform: translateX(-10px);
+  opacity: 0;
+  border-right-color: transparent;
+  pointer-events: none;
+}
+
+.appSidebarCollapsed .sidebarInner {
+  opacity: 0;
+}
+
+.sidebarInner {
+  height: 100%;
+  padding: 18px var(--sidebarPadX) 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.brandBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 1px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.brandMark {
+  color: var(--accent);
+  display: inline-flex;
+}
+
+.brandText {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: #2f66ff;
+  white-space: nowrap;
+}
+
+.collapseBtn {
+  width: 34px;
+  height: 30px;
+  border: 1px solid #eef2f7;
+  background: #ffffff;
+  color: #111827;
+  padding: 0;
+  border-radius: 999px;
+  box-shadow: var(--shadow2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    color 120ms ease;
+}
+
+.collapseBtn:hover {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.collapseBtn:active {
+  background: #f1f5f9;
+  transform: translateY(0px);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+}
+
+.sidebarIconDesktop {
+  display: block;
+}
+
+.sidebarIconMobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebarIconDesktop {
+    display: none;
+  }
+
+  .sidebarIconMobile {
+    display: block;
+  }
+}
+
+.collapseBtn:focus-visible {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16), var(--shadow2);
+}
+
+.newChatBtn {
+  width: 100%;
+  height: 31px;
+  border-radius: 999px;
+  border: 1px solid #eef2f7;
+  background: #ffffff;
+  box-shadow: var(--shadow2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.newChatBtn:hover {
+  background: #f8fafc;
+}
+
+.newChatIcon {
+  display: inline-flex;
+  color: #111827;
+}
+
+.newChatText {
+  font-weight: 650;
+  font-size: 0.85rem;
+}
+
+.threadList {
+  flex: 1;
+  overflow: auto;
+  padding: 5px 1px 8px;
+}
+
+.threadGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 7px 0;
+}
+
+.threadSection {
+  color: #9ca3af;
+  font-weight: 650;
+  font-size: 0.75rem;
+  padding: 0 2px;
+}
+
+.threadItem {
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: #111827;
+  font-size: 0.85rem;
+  line-height: 1.25;
+  padding: 7px 7px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.threadItem:hover {
+  background: #f8fafc;
+}
+
+.threadItemActive {
+  background: #f1f5f9;
+}
+
+.sidebarFooter {
+  padding: 7px 0 2px;
+}
+
+.loginBtn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  color: #111827;
+  transition: background 120ms ease;
+}
+
+.loginBtn:hover {
+  background: #f1f5f9;
+}
+
+.loginIcon {
+  display: inline-flex;
+  color: #64748b;
+}
+
+.loginText {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.collapsedControls {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 240ms ease;
+  will-change: opacity, transform;
+}
+
+.appSidebarCollapsed .collapsedControls {
+  opacity: 1;
+  transform: translateY(0px);
+  pointer-events: auto;
+}
+
+.collapsedBrand {
+  color: var(--accent);
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.collapsedPill {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid #eef2f7;
+  background: #ffffff;
+  box-shadow: var(--shadow2);
+}
+
+.collapsedPillBtn {
+  width: 34px;
+  height: 30px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.collapsedPillBtn:hover {
+  background: #f8fafc;
+}
+
+.collapsedPillBtn:disabled {
+  opacity: 1;
+}
+
+.collapsedPillDivider {
+  width: 1px;
+  height: 18px;
+  background: #e5e7eb;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sidebar,
+  .sidebarInner,
+  .collapsedControls {
+    transition: none !important;
+  }
+}
+
+.chatColumn {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.chatEmpty {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 60px 0;
+}
+
+.heroRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(-8px);
+}
+
+.heroIcon {
+  color: var(--accent);
+}
+
+.heroTitle {
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.composerCard {
+  width: min(760px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+  padding: 14px 14px 10px;
+}
+
+.composerTop {
+  padding: 6px 4px 10px;
+}
+
+.composerTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.45;
+  padding: 0 2px;
+}
+
+.composerTextarea::placeholder {
+  color: #94a3b8;
+}
+
+.composerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 2px 2px 0;
+}
+
+
+
+.composerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconButton {
+  border: none;
+  background: transparent;
+  color: #111827;
+  opacity: 0.75;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: #f1f5f9;
+  opacity: 0.9;
+}
+
+.sendFab {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  background: var(--accentSoft);
+  color: #2563eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sendFab:hover {
+  background: #cfe3ff;
+}
+
+.sendFab:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chatConversation {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+}
+
+.chatTopBar {
+  height: 54px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+}
+
+.chatTopBarInner {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatTopTitle {
+  justify-self: center;
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chatTopBtn {
+  justify-self: end;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.chatTopBtn:hover {
+  background: #f8fafc;
+  color: #374151;
+}
+
+.chatTopBtn:active {
+  background: #f1f5f9;
+}
+
+.chatTopBtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+}
+
+.chatList {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 26px 0 0;
+}
+
+.chatListInner {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 0 16px 26px;
+}
+
+.msgBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 18px 0;
+}
+
+.msgBlockUser {
+  align-items: flex-end;
+}
+
+.msgBlockAssistant {
+  align-items: flex-start;
+}
+
+.msgBlockPending .msgContent {
+  color: #64748b;
+  font-style: italic;
+}
+
+.msgBlockError .msgContent {
+  color: #dc2626;
+}
+
+.userBubble {
+  max-width: min(420px, 92%);
+  width: fit-content;
+  background: rgba(59, 130, 246, 0.12);
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+.assistantText {
+  max-width: min(680px, 100%);
+  padding: 0 2px;
+}
+
+.msgContent {
+  word-break: break-word;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.msgContent p {
+  margin: 0;
+}
+
+.msgText {
+  white-space: pre-wrap;
+}
+
+.msgCodeBlock {
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.msgCodeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: #64748b;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.msgCodeLabel {
+  font-weight: 600;
+}
+
+.codeCopyButton {
+  border: none;
+  background: transparent;
+  color: #64748b;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.codeCopyButton:hover {
+  color: #0f172a;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.msgCodeBlock pre {
+  margin: 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.msgCodeBlock code {
+  font-family: inherit;
+}
+
+.msgCodeBlock code.hljs {
+  display: block;
+  color: #0f172a;
+}
+
+.msgCodeBlock .hljs-comment {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.msgCodeBlock .hljs-keyword,
+.msgCodeBlock .hljs-built_in,
+.msgCodeBlock .hljs-type {
+  color: #a855f7;
+  font-weight: 600;
+}
+
+.msgCodeBlock .hljs-string {
+  color: #16a34a;
+}
+
+.msgCodeBlock .hljs-number {
+  color: #f97316;
+}
+
+.msgCodeBlock .hljs-title,
+.msgCodeBlock .hljs-function {
+  color: #2563eb;
+}
+
+.msgCodeBlock .hljs-params,
+.msgCodeBlock .hljs-attr,
+.msgCodeBlock .hljs-property {
+  color: #0f172a;
+}
+
+.msgActions {
+  display: flex;
+  gap: 6px;
+}
+
+.msgActionBtn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #9ca3af;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.msgActionBtn:hover {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.msgActionBtn:active {
+  background: #f1f5f9;
+  transform: translateY(0.5px);
+}
+
+.msgActionBtn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+}
+
+.chatDock {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0 18px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0));
+}
+
+.chatFootnote {
+  font-size: 0.72rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+@media (max-width: 920px) {
+  :root {
+    --sidebarW: 280px;
+  }
+}
+
+/* Mobile Overhaul Styles */
+/* Mobile elements base state (hidden on desktop) */
+.mobileHeader,
+.mobileBackdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebarW: 85%;
+    /* Mobile sidebar width */
+  }
+
+  .app {
+    flex-direction: row;
+    /* Keep row to allow overlay behavior */
+  }
+
+  /* Sidebar as Overlay */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    background: #ffffff;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    border-right: none;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  /* Fix for leaking shadow when collapsed on mobile */
+  .appSidebarCollapsed .sidebar {
+    width: var(--sidebarW);
+    flex-basis: auto;
+    transform: translateX(-100%);
+    opacity: 1;
+    pointer-events: none;
+    box-shadow: none;
+    /* Removed shadow when closed */
+  }
+
+  /* ... other existing styles ... */
+
+
+  /* Mobile Backdrop */
+  .mobileBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobileBackdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mobile Sidebar styling adjust */
+  .sidebarInner {
+    padding: 16px;
+  }
+
+  .brandBar {
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .brandText {
+    font-size: 1.3rem;
+    color: #3b82f6;
+    /* DeepSeek Blue-ish */
+  }
+
+  .collapseBtn {
+    /* On mobile, this acts as the "close/sidebar" toggle inside the drawer */
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    color: #64748b;
+  }
+
+  .newChatBtn {
+    height: 44px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .threadSection {
+    margin-top: 10px;
+    margin-bottom: 6px;
+  }
+
+  .loginBtn {
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .loginText {
+    font-size: 1rem;
+  }
+
+  /* Main Content Mobile Adjustments */
+  .main {
+    padding: 0;
+    /* Full width */
+    width: 100%;
+  }
+
+  .chatColumn {
+    width: 100%;
+    padding-top: 60px;
+    /* Space for Mobile Header */
+  }
+
+  /* Hide Desktop Collapsed Controls on Mobile */
+  .collapsedControls {
+    display: none;
+  }
+
+  /* Mobile Header */
+  .mobileHeader {
+    display: flex;
+    /* Show on mobile */
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 16px;
+    background: #ffffff;
+    /* Or transparent if like initial screen? S1 looks white/transparent */
+    z-index: 800;
+  }
+
+  .mobileHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobileMenuBtn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #111827;
+  }
+
+  .getAppBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f1f5f9;
+    border-radius: 999px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+  }
+
+  .mobileNewChatBtn {
+    background: none;
+    border: none;
+    color: #111827;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  /* Chat Area Mobile */
+  .chatEmpty {
+    padding: 20px 16px;
+    justify-content: center;
+    /* Center vertically roughly */
+  }
+
+  /* Hide standard ChatTopBar on mobile if needed, or style it */
+  .chatTopBar {
+    display: none;
+    /* We use .mobileHeader instead */
+  }
+
+  .chatConversation {
+    padding-bottom: 20px;
+  }
+
+  .heroTitle {
+    font-size: 1.4rem;
+  }
+
+  /* Composer Mobile */
+  .chatDock {
+    padding: 10px 16px 20px;
+    background: #ffffff;
+    /* Solid background on mobile usually better? S1 looks clean */
+  }
+
+  .composerCard {
+    border-radius: 24px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .composerTextarea {
+    font-size: 1.05rem;
+  }
+
+  /* DeepThink & Search Pills */
+  .composerPills {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .composerPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+  }
+
+  .composerActions {
+    margin-left: auto;
+    /* Push to right */
+  }
+
+  .sendFab {
+    background: #3b82f6;
+    /* Blue send button */
+    color: white;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
